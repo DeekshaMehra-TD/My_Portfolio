@@ -1,0 +1,107 @@
+.portfolio-grid-section {
+  position: relative;
+}
+
+.grid-header {
+  margin-bottom: var(--space-lg);
+}
+
+.directory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(260px, 22vw, 400px), 1fr));
+  gap: var(--space-md);
+}
+
+/* Link cards get pointer cursor + border highlight on hover */
+.directory-item.is-link {
+  cursor: pointer;
+}
+
+/* Coming soon cards are slightly muted */
+.directory-item.is-coming-soon {
+  cursor: default;
+  opacity: 0.65;
+}
+
+.coming-soon-tag {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-denim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: var(--color-grey-base);
+  padding: 0.1em 0.6em;
+  border-radius: 20px;
+}
+
+.directory-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: pointer;
+  padding: var(--space-md) !important;
+  border: 1px solid transparent;
+  transform-origin: top left;
+}
+
+.directory-item:hover {
+  transform: translateY(-8px) scale(1.02) rotate(-1.5deg);
+  box-shadow: 15px 25px 30px rgba(0,0,0,0.08),
+              inset 0 0 40px rgba(243,243,243,0.8);
+  border: 1px solid var(--color-raspberry);
+}
+
+.item-num {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--color-pink-base);
+  text-shadow: 1px 1px 0 var(--color-raspberry),
+               -1px -1px 0 var(--color-raspberry),
+               1px -1px 0 var(--color-raspberry),
+               -1px 1px 0 var(--color-raspberry);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.item-content h3 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-md);
+  color: var(--color-purple);
+  margin-bottom: 0.25rem;
+}
+
+.item-content p {
+  font-size: var(--text-sm);
+  color: var(--color-denim);
+  font-style: italic;
+}
+
+.item-arrow {
+  margin-left: auto;
+  font-size: var(--text-lg);
+  color: var(--color-raspberry);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.directory-item:hover .item-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .directory-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+  .item-arrow {
+    align-self: flex-end;
+  }
+}

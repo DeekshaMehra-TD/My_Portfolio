@@ -1,0 +1,191 @@
+:root {
+  --color-pink-base: #FCE4E6;
+  --color-grey-base: #F3F3F3;
+  --color-raspberry: #C21E56;
+  --color-purple: #4A154B;
+  --color-lavender: #D8B4F8;
+  --color-indigo: #1A2B4C;
+  --color-denim: #5C7EAD;
+
+  --font-display: 'Chonburi', serif;
+  --font-body: 'Quicksand', sans-serif;
+  --font-script: 'Caveat', cursive;
+
+  --texture-opacity: 0.15;
+
+  /* ── Fluid spacing tokens ─────────────────────────────── */
+  /* clamp(min, preferred-vw, max) — scales linearly with viewport */
+  --space-xs:  clamp(0.5rem,  0.5vw,  1rem);
+  --space-sm:  clamp(1rem,    1vw,    1.75rem);
+  --space-md:  clamp(1.5rem,  2vw,    3rem);
+  --space-lg:  clamp(2rem,    3vw,    5rem);
+  --space-xl:  clamp(3rem,    5vw,    8rem);
+  --space-2xl: clamp(4.5rem,  7vw,   11rem);
+  --space-3xl: clamp(6rem,    9vw,   14rem);
+
+  /* ── Fluid type scale ──────────────────────────────────── */
+  --text-xs:   clamp(0.75rem,  0.8vw,   1rem);
+  --text-sm:   clamp(0.875rem, 0.9vw,   1.1rem);
+  --text-base: clamp(1rem,     1.1vw,   1.35rem);
+  --text-md:   clamp(1.1rem,   1.2vw,   1.5rem);
+  --text-lg:   clamp(1.5rem,   1.8vw,   2.5rem);
+  --text-xl:   clamp(2rem,     2.5vw,   3.5rem);
+  --text-2xl:  clamp(2.5rem,   3.5vw,   5rem);
+  --text-3xl:  clamp(3rem,     4.5vw,   6.5rem);
+
+  /* ── Container widths ──────────────────────────────────── */
+  --container-max: 1200px;
+}
+
+/* Scale container with viewport on 2K+ */
+@media (min-width: 1440px) { :root { --container-max: 1360px; } }
+@media (min-width: 1920px) { :root { --container-max: 1600px; } }
+@media (min-width: 2560px) { :root { --container-max: 2000px; } }
+@media (min-width: 3200px) { :root { --container-max: 2560px; } }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  background-color: var(--color-pink-base);
+  color: var(--color-indigo);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Global Fabric Texture Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+  opacity: var(--texture-opacity);
+  pointer-events: none;
+  z-index: 1000;
+  mix-blend-mode: multiply;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+/* ── Utility classes ──────────────────────────────────────── */
+.pill-badge {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-md);
+  /* Organic handmade border radius */
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  border: 2px solid var(--color-raspberry);
+  color: var(--color-raspberry);
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: white;
+  box-shadow: 2px 2px 0px var(--color-raspberry);
+  font-size: var(--text-sm);
+}
+
+.scrapbook-card {
+  background: white;
+  /* Soft uneven border radius for organic cloth feel */
+  border-radius: clamp(8px, 1vw, 18px) clamp(12px, 1.5vw, 24px) clamp(8px, 1vw, 18px) clamp(16px, 2vw, 30px);
+  padding: var(--space-md);
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.05),
+              inset 0 0 40px rgba(243,243,243,0.8);
+  position: relative;
+}
+
+/* Inner stitched border effect */
+.scrapbook-card::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(194, 30, 86, 0.25);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.scrapbook-card::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(30px, 3vw, 55px);
+  height: 15px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border-radius: 2px;
+}
+
+.handwritten {
+  font-family: var(--font-script);
+  font-size: var(--text-lg);
+  color: var(--color-raspberry);
+  transform: rotate(-2deg);
+}
+
+.btn-primary {
+  background: var(--color-raspberry);
+  color: white;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  font-family: var(--font-body);
+  font-weight: bold;
+  font-size: var(--text-sm);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(194, 30, 86, 0.3);
+}
+
+/* Animations */
+@keyframes float {
+  0%   { transform: translateY(0px) rotate(0deg); }
+  50%  { transform: translateY(-10px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.float-anim {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ── Layout ──────────────────────────────────────────────── */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.section-padding {
+  padding: var(--space-xl) 0;
+}
+
+/* ── Small screen overrides ──────────────────────────────── */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-sm);
+  }
+  .section-padding {
+    padding: var(--space-lg) 0;
+  }
+}

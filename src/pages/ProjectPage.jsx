@@ -209,7 +209,7 @@ const ProjectPage = () => {
         </section>
       )}
       {/* ── Motifs ─────────────────────────────────── */}
-      {project.motifs && (
+      {project.motifs && slug !== 'komudika-kaavya' && (
         <section className="project-custom-layout container" style={{ marginTop: 'var(--space-xl)', marginBottom: '0' }}>
           <ScrollReveal variants={fadeUp} style={{ textAlign: 'center', marginBottom: 'var(--space-xs)' }}>
           </ScrollReveal>

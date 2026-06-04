@@ -1,163 +1,38 @@
-/* ── Loader overlay ─────────────────────────────────────── */
-.loader-overlay {
+.loader-wrapper {
   position: fixed;
   inset: 0;
-  z-index: 99999;
-  background: var(--color-pink-base);
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  clip-path: inset(0 0 0 0);
+  background-color: #BC3854; /* Saturated pink */
+  color: white;
 }
 
-/* Fabric texture */
-.loader-texture {
+.loader-curve {
   position: absolute;
-  inset: 0;
-  background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)"/%3E%3C/svg%3E');
-  opacity: 0.12;
-  pointer-events: none;
-  mix-blend-mode: multiply;
-}
-
-/* ── Content block ──────────────────────────────────────── */
-.loader-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(0.8rem, 2vw, 2rem);
-  width: min(560px, 90vw);
-  position: relative;
-  z-index: 2;
-}
-
-/* ── Lottie sewing machine ──────────────────────────────── */
-.loader-lottie-wrap {
-  width: clamp(160px, 26vw, 280px);
-  height: clamp(160px, 26vw, 280px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  filter: drop-shadow(0 4px 30px rgba(194, 30, 86, 0.12));
+  bottom: -90px;
+  left: 0;
+  height: 180px;
+  width: 100vw; /* Stretch full width */
   border-radius: 50%;
-  overflow: hidden;
+  background-color: #BC3854; /* Match wrapper */
 }
 
-.loader-lottie-player {
-  width: 100%;
-  height: 100%;
-}
-
-/* ── Name stitched letter by letter ─────────────────────── */
-.loader-name {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3.8vw, 3.5rem);
-  color: var(--color-purple);
-  letter-spacing: clamp(0.05em, 0.4vw, 0.15em);
-  line-height: 1.15;
-  gap: 0.02em;
-  white-space: nowrap;
-}
-
-.loader-char {
-  display: inline-block;
-}
-
-.loader-space {
-  width: 0.35em;
-}
-
-/* ── Subtitle ────────────────────────────────────────────── */
-.loader-subtitle {
-  font-family: var(--font-script);
-  font-size: clamp(1.1rem, 2.2vw, 1.8rem);
-  color: var(--color-raspberry);
-  transform: rotate(-1.5deg);
-  letter-spacing: 0.04em;
-}
-
-/* ── Stitched progress bar ──────────────────────────────── */
-.loader-progress-track {
-  width: 100%;
-  height: 8px;
-  background: rgba(194, 30, 86, 0.1);
-  border-radius: 50px;
+.loader-text-container {
   position: relative;
-  overflow: hidden;
-  border: 1px dashed rgba(194, 30, 86, 0.25);
-}
-
-.loader-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--color-raspberry), var(--color-lavender), var(--color-raspberry));
-  background-size: 200% 100%;
-  border-radius: 50px;
-  transition: width 0.08s linear;
-  animation: shimmer 2s linear infinite;
-}
-
-@keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-/* Stitch marks overlaid on the progress bar */
-.loader-stitch-marks {
-  position: absolute;
-  inset: 0;
+  height: 80px;
+  overflow: hidden; /* Hide the text as it slides out of this box */
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  pointer-events: none;
 }
 
-.stitch-mark {
-  display: block;
-  width: 2px;
-  height: 14px;
-  background: var(--color-raspberry);
-  border-radius: 1px;
-  transition: opacity 0.2s ease;
-}
-
-/* ── Percentage row ─────────────────────────────────────── */
-.loader-percent-row {
+.loader-heading {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: clamp(2rem, 5vw, 3.5rem); /* Equivalent to text-4xl md:text-6xl */
+  font-weight: 500;
+  letter-spacing: -0.02em; /* tracking-tight */
+  margin: 0;
   display: flex;
-  align-items: baseline;
-  gap: clamp(0.5rem, 1.5vw, 1.5rem);
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.loader-percent-num {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 4.5vw, 4rem);
-  color: var(--color-raspberry);
-  line-height: 1;
-  min-width: 3ch;
-  text-align: right;
-}
-
-.pct-sign {
-  font-size: 0.5em;
-  color: var(--color-purple);
-  vertical-align: super;
-}
-
-.loader-percent-label {
-  font-family: var(--font-script);
-  font-size: clamp(1rem, 1.8vw, 1.5rem);
-  color: var(--color-purple);
-  white-space: nowrap;
-}
-
-/* ── Mobile ─────────────────────────────────────────────── */
-@media (max-width: 480px) {
-  .loader-name {
-    letter-spacing: 0.04em;
-  }
+  align-items: center;
 }

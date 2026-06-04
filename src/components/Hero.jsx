@@ -1,11 +1,11 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { SparkleIcon, HeartIcon, StarIcon } from './Icons';
+import { motion } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
-import { fadeLeft, fadeRight, fadeUp, popIn, staggerContainer, staggerChild, viewport } from '../hooks/useScrollReveal';
+import ThreadDivider from './ThreadDivider';
+import { fadeLeft, fadeRight, fadeUp, staggerContainer, staggerChild, viewport } from '../hooks/useScrollReveal';
 import './Hero.css';
 
-/* ── Lightweight inline SVG icons (replaces 1,400 KiB react-icons/fa barrel) ── */
+/* ── Lightweight inline SVG icons ── */
 const PhoneIcon = () => (
   <svg width="16" height="16" viewBox="0 0 512 512" fill="currentColor"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg>
 );
@@ -26,177 +26,145 @@ const LinkedInIcon = () => (
 );
 
 const Hero = () => {
-  // Parallax: floating doodles move at different rates while scrolling
-  const { scrollY } = useScroll();
-  const doodle1Y = useTransform(scrollY, [0, 400], [0, -60]);
-  const doodle2Y = useTransform(scrollY, [0, 400], [0, -40]);
-  const titleRotate = useTransform(scrollY, [0, 300], [-3, 0]);
-
   return (
-    <section className="hero-section container section-padding">
-      <div className="hero-grid">
+    <main>
+      {/* ════════════════════════════════════════════════════════
+          COVER SECTION — Built with clean code, 100% responsive
+          ════════════════════════════════════════════════════════ */}
+      <section className="cover-section">
+        <motion.img
+          src="/Home Page-opt.webp"
+          alt="Deeksha Mehra — Textile Design Portfolio"
+          className="cover-image"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+        />
 
-        {/* Left Column — slide in from left */}
-        <ScrollReveal variants={fadeLeft} className="hero-left">
-          <motion.div
-            className="scrapbook-card contact-card"
-            variants={staggerContainer(0.08, 0.2)}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewport}
-          >
-            {[
-              { Icon: PhoneIcon,     text: '+91 7983819892' },
-              { Icon: MapPinIcon,    text: 'Haldwani, Nainital, Uttarakhand' },
-              { Icon: EnvelopeIcon,  text: 'dikshamehra2501@gmail.com' },
-              { Icon: InstagramIcon, text: '@diksha_2501' },
-              { Icon: BehanceIcon,   text: 'deekshamehra2501' },
-              { Icon: LinkedInIcon,  text: 'deeksha-mehra-0a3676301' },
-            ].map(({ Icon, text }) => (
-              <motion.div key={text} className="contact-item" variants={staggerChild}>
-                <span className="icon-badge"><Icon /></span>
-                <p>{text}</p>
-              </motion.div>
-            ))}
-          </motion.div>
+      </section>
 
-          <ScrollReveal variants={fadeUp} delay={0.1} className="skills-card">
-            <h3 className="pill-badge">Skills</h3>
-            <motion.ul
-              className="custom-list"
-              variants={staggerContainer(0.1, 0.15)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewport}
-            >
-              {['Weaving & Spinning', 'Crochet & Embroideries', 'Prints & Illustrations', 'Trend Analysis'].map(s => (
-                <motion.li key={s} variants={staggerChild}>{s}</motion.li>
-              ))}
-            </motion.ul>
+      <ThreadDivider />
+
+      {/* ════════════════════════════════════════════════════════
+          RESUME / ABOUT — Clean professional grid
+          ════════════════════════════════════════════════════════ */}
+      <section className="hero-section container section-padding">
+        <div className="hero-grid">
+
+          {/* ── LEFT: Profile Image + About ─────────────────── */}
+          <ScrollReveal variants={fadeLeft} className="hero-left">
+            <div className="profile-card">
+              <img 
+                src="/deeksha-mehra-opt.webp" 
+                alt="Deeksha Mehra" 
+                className="profile-image"
+                loading="eager"
+              />
+            </div>
+            <div className="about-block">
+              <h1 className="hero-name">Deeksha Mehra</h1>
+              <p className="hero-tagline">Textile Designer</p>
+              <p className="hero-bio">
+                Textile Design graduate with a minor in Fashion Communication. I'm always chasing the perfect blend of tradition and innovation because design should never be boring, and neither should the fabrics we live with.
+              </p>
+            </div>
           </ScrollReveal>
 
-          <ScrollReveal variants={fadeUp} delay={0.2} className="softwares-card">
-            <h3 className="pill-badge">Softwares</h3>
-            <motion.ul
-              className="custom-list"
-              variants={staggerContainer(0.1, 0.15)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewport}
-            >
-              {['Adobe Photoshop', 'Adobe InDesign', 'Adobe Illustrator', 'Pointcarre'].map(s => (
-                <motion.li key={s} variants={staggerChild}>{s}</motion.li>
-              ))}
-            </motion.ul>
-          </ScrollReveal>
-        </ScrollReveal>
+          {/* ── CENTER: Contact + Skills ────────────────────── */}
+          <ScrollReveal variants={fadeUp} className="hero-center">
+            
+            <div className="info-card">
+              <h2 className="info-card-title">Contact</h2>
+              <div className="contact-list">
+                <div className="contact-row">
+                  <span className="contact-icon"><PhoneIcon /></span>
+                  <span>+91 7983819892</span>
+                </div>
+                <div className="contact-row">
+                  <span className="contact-icon"><MapPinIcon /></span>
+                  <span>Haldwani, Uttarakhand</span>
+                </div>
+                <div className="contact-row">
+                  <span className="contact-icon"><EnvelopeIcon /></span>
+                  <span>dikshamehra2501@gmail.com</span>
+                </div>
+                <div className="contact-row">
+                  <span className="contact-icon"><InstagramIcon /></span>
+                  <span>@diksha_2501</span>
+                </div>
+                <div className="contact-row">
+                  <span className="contact-icon"><BehanceIcon /></span>
+                  <span>deekshamehra2501</span>
+                </div>
+                <div className="contact-row">
+                  <span className="contact-icon"><LinkedInIcon /></span>
+                  <span>deeksha-mehra-0a3676301</span>
+                </div>
+              </div>
+            </div>
 
-        {/* Center Column — scale + rotate drop-in */}
-        <motion.div
-          className="hero-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          variants={staggerContainer(0.15, 0)}
-        >
-          <motion.div className="giant-title" style={{ rotate: titleRotate }}>
-            {['TEXTILE', 'DESIGN'].map((word, i) => (
-              <motion.div key={word} className="title-pill" variants={{
-                hidden: { opacity: 0, scale: 0.7, y: 40 },
-                visible: { opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 100, damping: 15, delay: i * 0.12 } },
-              }}>
-                {word}
-              </motion.div>
-            ))}
-            <motion.div className="title-pill o-pattern" variants={{
-              hidden: { opacity: 0, scale: 0.7, y: 40 },
-              visible: { opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 100, damping: 15, delay: 0.24 } },
-            }}>
-              PORTF<span>O</span>LIO
-            </motion.div>
-            <motion.div className="title-pill name-pill" variants={{
-              hidden: { opacity: 0, scale: 0.7, y: 40 },
-              visible: { opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 100, damping: 15, delay: 0.36 } },
-            }}>
-              DEEKSHA MEHRA
-            </motion.div>
-          </motion.div>
-        </motion.div>
+            <div className="info-card">
+              <h2 className="info-card-title">Skills</h2>
+              <ul className="skill-list">
+                <li>Basic weaving, Hand spinning, Crocheting, Knitting Techniques</li>
+                <li>Traditional Emobroideries and other surface Techniques</li>
+                <li>Experience with different type of printing Techniques</li>
+                <li>Illustrations (digital and hand)</li>
+                <li>Ability to analyze current threads in textiles and fashion</li>
+                <li style={{ color: '#C21E56' }}>I leverage AI tools to accelerate concept development, allowing me to quickly generate design variations, visual prototypes, and mockups. This lets me explore more ideas in less time, test different directions, and ensure I bring the strongest vision to life - always keeping my creative vision at the forefront</li>
+              </ul>
+            </div>
 
-        {/* Right Column — slide in from right */}
-        <ScrollReveal variants={fadeRight} className="hero-right">
-          <div className="about-block">
-            <motion.h2
-              className="raspberry-heading"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={viewport}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              ABOUT ME
-            </motion.h2>
-            <motion.p
-              className="handwritten highlight-text"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={viewport}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              Hi, my name is DEEKSHA MEHRA
-            </motion.p>
-            <motion.p
-              className="body-text"
-              style={{ display: 'flex', alignItems: 'flex-end', flexWrap: 'wrap', gap: '0.2rem' }}
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={viewport}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              and I'm a fourth-year textile design student with a minor in fashion communication. I'm always chasing that perfect blend of chaos and charm because design should never be boring (and neither should your fabric)&nbsp;
-              <SparkleIcon color="var(--color-purple)" width={24} height={24} style={{ marginBottom: '2px' }} />
-            </motion.p>
-          </div>
-
-          <ScrollReveal variants={popIn} delay={0.15} className="interests-card scrapbook-card mt-4">
-            <h3 className="pill-badge">Interests</h3>
-            <motion.div
-              className="interests-grid"
-              variants={staggerContainer(0.08, 0.2)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewport}
-            >
-              {['Knitting', 'Crocheting', 'Cycling', 'Sewing', 'Styling', 'Photography'].map(interest => (
-                <motion.span key={interest} variants={staggerChild}>{interest}</motion.span>
-              ))}
-            </motion.div>
           </ScrollReveal>
 
-          <div className="profile-image-container float-anim">
-            <motion.img
-              src="/profile.webp"
-              alt="Deeksha Mehra"
-              className="profile-image"
-              fetchpriority="high"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={viewport}
-              transition={{ type: 'spring', stiffness: 80, damping: 18, delay: 0.2 }}
-            />
-            <motion.div className="doodle star-1" style={{ y: doodle1Y }}>
-              <SparkleIcon color="var(--color-purple)" />
-            </motion.div>
-            <motion.div className="doodle heart-1" style={{ y: doodle2Y }}>
-              <HeartIcon color="var(--color-raspberry)" />
-            </motion.div>
-            <div className="doodle star-2"><StarIcon color="white" /></div>
-          </div>
-        </ScrollReveal>
+          {/* ── RIGHT: Software, Interests, Education ───────── */}
+          <ScrollReveal variants={fadeRight} className="hero-right">
+            
+            <div className="info-card">
+              <h2 className="info-card-title">Software</h2>
+              <ul className="skill-list">
+                <li>Adobe Photoshop</li>
+                <li>Adobe InDesign</li>
+                <li>Adobe Illustrator</li>
+                <li>Pointcarre</li>
+                <li>Figma</li>
+                <li>Procreate</li>
+              </ul>
+            </div>
 
-      </div>
-    </section>
+            <div className="info-card">
+              <h2 className="info-card-title">Interests</h2>
+              <div className="interests-grid">
+                <span className="interest-chip">Knitting</span>
+                <span className="interest-chip">Crocheting</span>
+                <span className="interest-chip">Cycling</span>
+                <span className="interest-chip">Sewing</span>
+                <span className="interest-chip">Styling</span>
+                <span className="interest-chip">Photography</span>
+              </div>
+            </div>
+
+            <div className="info-card">
+              <h2 className="info-card-title">Education</h2>
+              <div className="edu-block">
+                <p className="edu-line">National Institute of Fashion Technology, Himachal Pradesh</p>
+                <p className="edu-sub">Bachelor of Design (B.Des) — Textile Design</p>
+                <p className="edu-sub">(2020 - 2024) - CGPA : 8.32</p>
+              </div>
+              <br></br>
+              <div className="edu-block">
+                <p className="edu-line">Gurukul International School, Haldwani, Nainital</p>
+                <p className="edu-sub">High School (12th) - PCM</p>
+                <p className="edu-sub">Percentage : 86%</p>
+              </div>
+            </div>
+
+          </ScrollReveal>
+
+        </div>
+      </section>
+    </main>
   );
 };
 
 export default Hero;
-

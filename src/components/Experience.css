@@ -7,43 +7,49 @@
   background: var(--color-grey-base);
   padding: var(--space-lg);
   border-radius: clamp(12px, 1.2vw, 24px);
-  transform: rotate(1deg);
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .section-title {
   text-align: center;
   font-size: var(--text-2xl);
   color: var(--color-raspberry);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-2xl);
   text-transform: uppercase;
   letter-spacing: clamp(1px, 0.2vw, 4px);
+  font-family: var(--font-secondary);
+  font-weight: 300;
 }
 
 .exp-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: var(--space-lg);
 }
 
 .column-title {
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   margin-bottom: var(--space-md);
   color: var(--color-indigo);
-  text-align: center;
-  border-bottom: 2px dashed var(--color-raspberry);
+  text-align: left;
   padding-bottom: var(--space-sm);
+  font-family: var(--font-secondary);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .timeline-item {
   position: relative;
   padding-left: var(--space-md);
   margin-bottom: var(--space-md);
-  border-left: 2px solid var(--color-lavender);
 }
 
 .timeline-dot {
   position: absolute;
-  left: -9px;
+  left: 0;
   top: 0;
   width: clamp(14px, 1.1vw, 20px);
   height: clamp(14px, 1.1vw, 20px);
@@ -52,18 +58,9 @@
   border: 3px solid white;
 }
 
-.star-dot {
-  background: transparent;
-  border: none;
-  left: -14px;
-  top: -4px;
-  color: var(--color-raspberry);
-  display: flex;
-  align-items: center;
-}
 
 .timeline-item h4 {
-  font-family: var(--font-body);
+  font-family: var(--font-secondary);
   font-weight: 700;
   font-size: var(--text-md);
   color: var(--color-purple);
@@ -83,9 +80,7 @@
   line-height: 1.6;
 }
 
-.project-item {
-  border-left-style: dashed;
-}
+
 
 /* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 900px) {
@@ -102,4 +97,17 @@
   .exp-container {
     padding: var(--space-sm);
   }
+}
+
+/* ── Large Screen Scaling ───────────────────────────────── */
+@media (min-width: 1440px) {
+  .exp-container { max-width: 1200px; }
+}
+
+@media (min-width: 1920px) {
+  .exp-container { max-width: 1400px; }
+}
+
+@media (min-width: 2560px) {
+  .exp-container { max-width: 1800px; }
 }

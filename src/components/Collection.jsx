@@ -32,26 +32,7 @@ const Collection = ({ id, title, subtitle, image, description, reverse }) => {
             <div className="tape tape-bottom"></div>
           </motion.div>
 
-          <motion.div
-            className="doodle star-1"
-            initial={{ opacity: 0, scale: 0, rotate: -45 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-            viewport={viewport}
-            transition={{ type: 'spring', stiffness: 200, damping: 14, delay: 0.4 }}
-          >
-            <StarIcon color="var(--color-raspberry)" />
-          </motion.div>
 
-          <motion.div
-            className="doodle"
-            style={{ bottom: '-20px', right: '10%' }}
-            initial={{ opacity: 0, scale: 0, rotate: 45 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-            viewport={viewport}
-            transition={{ type: 'spring', stiffness: 200, damping: 14, delay: 0.55 }}
-          >
-            <FlowerIcon color="var(--color-raspberry)" width={48} height={48} />
-          </motion.div>
         </ScrollReveal>
 
         {/* Content side */}
@@ -77,7 +58,7 @@ const Collection = ({ id, title, subtitle, image, description, reverse }) => {
           </motion.h2>
 
           <motion.h4
-            className="collection-subtitle handwritten"
+            className="collection-subtitle"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={viewport}

@@ -6,6 +6,42 @@ import { fadeUp, staggerContainer, viewport } from '../hooks/useScrollReveal';
 import { projects } from '../data/projects';
 import './PortfolioGrid.css';
 
+const directoryTitles = {
+  'blooming-affair': 'A BLOOMING AFFAIR',
+  'komudika-kaavya': 'KOMUDIKA KAAVYA LEHENGA SET (FOR TORANI INDIA)',
+  'ainu-textile': 'AINU TEXTILE (JAPAN) INSPIRED COLLECTION',
+  'denim-with-heart': 'DENIM WITH HEART',
+  'kamal': 'KAMAL'
+};
+
+const directoryConfigs = {
+  'blooming-affair': {
+    image: '/Blooming_Affair/MainPageCoverPhoto-opt.webp',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  },
+  'komudika-kaavya': {
+    image: '/Komudika/high-res-resize_0098_watermark-torani-fin_-copy-928_700x-opt.webp',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  },
+  'ainu-textile': {
+    image: '/Ainu Textile/AinuMain1-opt.webp',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  },
+  'denim-with-heart': {
+    image: '/Denim with Heart/NewCoverImage-opt.webp',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  },
+  'kamal': {
+    image: '/Kamal/CoverImage-opt.webp',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  }
+};
+
 const PortfolioGrid = () => {
   const navigate = useNavigate();
 
@@ -14,77 +50,80 @@ const PortfolioGrid = () => {
     navigate(`/project/${project.slug}`);
   };
 
-  const printDesigns = projects.filter(p => p.category === 'Print Designs');
-  const weaves = projects.filter(p => p.category === 'Weaves and Surface Designs');
-
-  const renderGrid = (items) => (
-    <motion.div
-      className="directory-grid"
-      variants={staggerContainer(0.1, 0.2)}
-      initial="hidden"
-      whileInView="visible"
-      viewport={viewport}
-    >
-      {items.map((project, index) => (
-        <motion.div
-          key={project.slug}
-          className={`directory-item scrapbook-card ${project.available ? 'is-link' : 'is-coming-soon'}`}
-          role={project.available ? 'button' : undefined}
-          tabIndex={project.available ? 0 : undefined}
-          onClick={() => handleClick(project)}
-          onKeyDown={(e) => e.key === 'Enter' && handleClick(project)}
-          aria-label={project.available ? `View ${project.title} project` : `${project.title} — coming soon`}
-          variants={{
-            hidden: { opacity: 0, y: 50, scale: 0.92 },
-            visible: {
-              opacity: 1, y: 0, scale: 1,
-              transition: { type: 'spring', stiffness: 90, damping: 16, delay: index * 0.08 },
-            },
-          }}
-          whileHover={project.available ? {
-            y: -8, scale: 1.03, rotate: -1,
-            boxShadow: '8px 8px 25px rgba(194,30,86,0.15)',
-            transition: { type: 'spring', stiffness: 300, damping: 20 },
-          } : {
-            scale: 1.01,
-            transition: { type: 'spring', stiffness: 300, damping: 20 },
-          }}
-          whileTap={project.available ? { scale: 0.97 } : {}}
-        >
-          <div className="item-num">{project.num}</div>
-          <div className="item-content">
-            <h3>{project.title}</h3>
-            <p>{project.subtitle}</p>
-            {!project.available && <span className="coming-soon-tag">Coming soon</span>}
-          </div>
-          {project.available && <div className="item-arrow">→</div>}
-        </motion.div>
-      ))}
-    </motion.div>
-  );
+  // Sort projects sequentially by their number, excluding Kairi
+  const sortedProjects = [...projects]
+    .filter(p => p.slug !== 'kairi')
+    .sort((a, b) => parseInt(a.num, 10) - parseInt(b.num, 10));
 
   return (
-    <section className="portfolio-grid-section container section-padding">
-      <ScrollReveal variants={fadeUp} className="grid-header text-center">
-        <h2 className="raspberry-heading" style={{ textAlign: 'center' }}>PROJECT DIRECTORY</h2>
-        <p className="handwritten">My creative journey...</p>
-      </ScrollReveal>
-
-      <div className="portfolio-categories" style={{ marginTop: 'var(--space-xl)' }}>
-        <div className="category-section" style={{ marginBottom: 'var(--space-xl)' }}>
-          <ScrollReveal variants={fadeUp}>
-            <h3 className="pill-badge" style={{ marginBottom: 'var(--space-md)' }}>Print Designs</h3>
-          </ScrollReveal>
-          {renderGrid(printDesigns)}
-        </div>
-
-        <div className="category-section">
-          <ScrollReveal variants={fadeUp}>
-            <h3 className="pill-badge" style={{ marginBottom: 'var(--space-md)' }}>Weaves and Surface Designs</h3>
-          </ScrollReveal>
-          {renderGrid(weaves)}
+    <section className="portfolio-grid-section">
+      {/* Content Banner Header */}
+      <div className="content-banner">
+        <div className="content-banner-card">
+          <h2 className="content-banner-title">CONTENT</h2>
         </div>
       </div>
+
+      {/* Grid of Projects */}
+      <motion.div
+        className="content-grid"
+        variants={staggerContainer(0.1, 0.2)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewport}
+      >
+        {sortedProjects.map((project, index) => {
+          const titleText = directoryTitles[project.slug] || project.title.toUpperCase();
+          const displayNum = parseInt(project.num, 10);
+          const config = directoryConfigs[project.slug] || {
+            image: project.image,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          };
+
+          return (
+            <motion.div
+              key={project.slug}
+              className={`content-item ${project.available ? 'is-link' : 'is-coming-soon'}`}
+              role={project.available ? 'button' : undefined}
+              tabIndex={project.available ? 0 : undefined}
+              onClick={() => handleClick(project)}
+              onKeyDown={(e) => e.key === 'Enter' && handleClick(project)}
+              aria-label={project.available ? `View ${project.title} project` : `${project.title} — coming soon`}
+              variants={{
+                hidden: { opacity: 0, y: 50 },
+                visible: {
+                  opacity: 1, y: 0,
+                  transition: { type: 'spring', stiffness: 90, damping: 16, delay: index * 0.08 },
+                },
+              }}
+            >
+              {/* Number Column */}
+              <div className="content-num-wrap">
+                <span className="content-number">{displayNum}</span>
+              </div>
+
+              {/* Card Frame & Title Column */}
+              <div className="content-card-wrap">
+                <div className="content-image-frame">
+                  <div
+                    className="content-image-bg"
+                    style={{
+                      backgroundImage: `url("${config.image}")`,
+                      backgroundSize: config.backgroundSize,
+                      backgroundPosition: config.backgroundPosition,
+                      backgroundRepeat: 'no-repeat',
+                      width: '100%',
+                      height: '100%'
+                    }}
+                  />
+                </div>
+                <h4 className="content-title">{titleText}</h4>
+              </div>
+            </motion.div>
+          );
+        })}
+      </motion.div>
     </section>
   );
 };

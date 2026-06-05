@@ -29,6 +29,7 @@ export const projects = [
       '/Kamal/Motifs2-opt.webp'
     ],
     imageGallery: [
+      '/Kamal/Kamal.webm',
       '/Kamal/ImageGallery_7560-opt.webp',
       '/Kamal/ImageGallery_7578-opt.webp',
       '/Kamal/ImageGallery_7631-opt.webp',
@@ -101,6 +102,7 @@ export const projects = [
       '/Picnic Cloth/Motifs3-opt.webp'
     ],
     imageGallery: [
+      '/Picnic Cloth/ThePicnicCloth.webm',
       '/Picnic Cloth/DESIGN1 (4)-opt.webp',
       '/Picnic Cloth/DESIGN1 (6)-opt.webp',
       '/Picnic Cloth/DESIGN1-opt.webp',

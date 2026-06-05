@@ -137,6 +137,18 @@
   font-size: var(--text-sm);
   font-weight: 500;
   color: var(--color-indigo);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+a.contact-row:hover {
+  color: var(--color-raspberry);
+  transform: translateX(4px);
+}
+
+a.contact-row:hover .contact-icon {
+  background: var(--color-purple);
+  transform: scale(1.05);
 }
 
 .contact-icon {
@@ -149,6 +161,7 @@
   color: white;
   border-radius: 8px;
   flex-shrink: 0;
+  transition: all 0.2s ease;
 }
 
 /* Skill / Software lists */

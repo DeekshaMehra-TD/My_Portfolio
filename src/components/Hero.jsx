@@ -76,30 +76,30 @@ const Hero = () => {
             <div className="info-card">
               <h2 className="info-card-title">Contact</h2>
               <div className="contact-list">
-                <div className="contact-row">
+                <a href="tel:+917983819892" className="contact-row">
                   <span className="contact-icon"><PhoneIcon /></span>
                   <span>+91 7983819892</span>
-                </div>
+                </a>
                 <div className="contact-row">
                   <span className="contact-icon"><MapPinIcon /></span>
                   <span>Haldwani, Uttarakhand</span>
                 </div>
-                <div className="contact-row">
+                <a href="mailto:dikshamehra2501@gmail.com" className="contact-row">
                   <span className="contact-icon"><EnvelopeIcon /></span>
                   <span>dikshamehra2501@gmail.com</span>
-                </div>
-                <div className="contact-row">
+                </a>
+                <a href="https://instagram.com/diksha_2501" target="_blank" rel="noopener noreferrer" className="contact-row">
                   <span className="contact-icon"><InstagramIcon /></span>
                   <span>@diksha_2501</span>
-                </div>
-                <div className="contact-row">
+                </a>
+                <a href="https://behance.net/deekshamehra2501" target="_blank" rel="noopener noreferrer" className="contact-row">
                   <span className="contact-icon"><BehanceIcon /></span>
                   <span>deekshamehra2501</span>
-                </div>
-                <div className="contact-row">
+                </a>
+                <a href="https://www.linkedin.com/in/deeksha-mehra-04b657404/" target="_blank" rel="noopener noreferrer" className="contact-row">
                   <span className="contact-icon"><LinkedInIcon /></span>
-                  <span>deeksha-mehra-0a3676301</span>
-                </div>
+                  <span>deeksha-mehra-04b657404</span>
+                </a>
               </div>
             </div>
 
@@ -149,7 +149,7 @@ const Hero = () => {
               <div className="edu-block">
                 <p className="edu-line">National Institute of Fashion Technology, Himachal Pradesh</p>
                 <p className="edu-sub">Bachelor of Design (B.Des) — Textile Design</p>
-                <p className="edu-sub">(2020 - 2024) - CGPA : 8.32</p>
+                <p className="edu-sub">(2022 - 2026) - CGPA : 8.1</p>
               </div>
               <br></br>
               <div className="edu-block">

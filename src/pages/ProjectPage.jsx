@@ -300,14 +300,7 @@ const ProjectPage = () => {
             {/* Divider Line */}
             <div style={{ width: '100vw', height: '3px', backgroundColor: 'var(--theme-primary, var(--color-raspberry))', opacity: 0.3, marginTop: '0', marginBottom: 'var(--space-2xl)', marginLeft: 'calc(-50vw + 50%)' }}></div>
 
-            {/* Brief Image */}
-            {project.briefImage && (
-              <div style={{ marginBottom: 'var(--space-3xl)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <ScrollReveal variants={fadeUp} delay={0.1} style={{ width: '100%' }}>
-                  <img src={project.briefImage} alt={`${project.title} - Brief`} className="has-theme-border" style={{ width: '100%', height: 'auto', display: 'block', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', borderRadius: '8px' }} loading="lazy" />
-                </ScrollReveal>
-              </div>
-            )}
+
 
             {/* Inspirations Collage */}
             {project.collageImage && (
@@ -878,10 +871,16 @@ const ProjectPage = () => {
               const rawName = img.split('/').pop().split('.')[0].replace(/[-_]/g, ' ');
               const formattedTitle = rawName.charAt(0).toUpperCase() + rawName.slice(1);
               
+              const isVideo = img.toLowerCase().endsWith('.webm') || img.toLowerCase().endsWith('.mp4');
+              
               return (
-                <ScrollReveal key={img} variants={fadeUp} delay={0.1} style={{ width: '100%' }}>
-                  <div className="gallery-item scrapbook-card no-border" style={{ overflow: 'hidden' }}>
-                    <img src={img} alt={`${project.title} - ${formattedTitle}`} style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 0 }} loading="lazy" />
+                <ScrollReveal key={img} variants={fadeUp} delay={0.1} style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                  <div className="gallery-item scrapbook-card no-border" style={{ overflow: 'hidden', width: isVideo ? 'fit-content' : '100%', maxWidth: '100%' }}>
+                    {isVideo ? (
+                      <video src={img} autoPlay loop muted playsInline style={{ maxWidth: '100%', maxHeight: '85vh', width: 'auto', height: 'auto', display: 'block', borderRadius: 0, margin: '0 auto' }} />
+                    ) : (
+                      <img src={img} alt={`${project.title} - ${formattedTitle}`} style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 0 }} loading="lazy" />
+                    )}
                     {i % 2 === 0 ? <div className="tape tape-top"></div> : <div className="tape tape-bottom" style={{ bottom: '-10px', top: 'auto' }}></div>}
                   </div>
                 </ScrollReveal>

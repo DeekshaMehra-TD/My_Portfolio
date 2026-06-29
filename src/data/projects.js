@@ -19,7 +19,7 @@ export const projects = [
       { label: 'Print Type', value: 'Placement Prints/Engineered Prints' },
       { label: 'Year', value: '2025' }
     ],
-    flipbookSrc: 'https://publuu.com/flip-book/1122441/2497708/page/1?embed',
+    flipbookSrc: 'https://heyzine.com/flip-book/77f3184642.html',
     boards: [
       '/Kamal/Themeboard-opt.webp',
       '/Kamal/Moodboard-opt.webp'

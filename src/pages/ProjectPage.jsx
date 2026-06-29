@@ -234,7 +234,7 @@ const ProjectPage = () => {
           </ScrollReveal>
           <ScrollReveal variants={fadeUp} style={{ width: '100%', maxWidth: '1600px', padding: '0 var(--space-md)' }}>
             <div style={{ width: '100%', background: 'transparent' }}>
-              <iframe src={project.flipbookSrc} style={{ width: '100%', height: '80vh', minHeight: '650px', display: 'block', border: 'none' }} scrolling="no" frameBorder="0" allow="clipboard-write; autoplay; fullscreen" allowFullScreen className="publuuflip"></iframe>
+              <iframe src={project.flipbookSrc} className="fp-iframe" style={{ width: '100%', height: '80vh', minHeight: '650px', display: 'block', border: '1px solid lightgray' }} scrolling="no" frameBorder="0" allow="clipboard-write" allowFullScreen></iframe>
             </div>
           </ScrollReveal>
         </section>

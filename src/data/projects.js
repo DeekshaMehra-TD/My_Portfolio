@@ -91,7 +91,7 @@ export const projects = [
       { label: 'Motifs', value: 'Digitally illustrated Motifs' },
       { label: 'Year', value: '2025' }
     ],
-    flipbookSrc: 'https://publuu.com/flip-book/1122441/2497710/page/1?embed',
+    flipbookSrc: 'https://heyzine.com/flip-book/0302bb6ab8.html',
     boards: [
       '/Picnic Cloth/Moodboard-opt.webp',
       '/Picnic Cloth/lookboard-opt.webp'

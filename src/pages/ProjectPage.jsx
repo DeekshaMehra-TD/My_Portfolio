@@ -4,6 +4,9 @@ import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { getProject } from '../data/projects';
 import { SparkleIcon, HeartIcon, StarIcon } from '../components/Icons';
 import ScrollReveal from '../components/ScrollReveal';
+import { IphoneMockup } from '../components/IphoneMockup';
+import { StickyCards } from '../components/StickyCards';
+import { PicnicCarousel } from '../components/PicnicCarousel';
 import { fadeUp, fadeLeft, fadeRight, staggerContainer, staggerChild, viewport } from '../hooks/useScrollReveal';
 import './ProjectPage.css';
 
@@ -860,35 +863,95 @@ const ProjectPage = () => {
       )}
 
       {/* ── Image Gallery (Generic) ──────────────────────── */}
-      {slug !== 'komudika-kaavya' && project.imageGallery && project.imageGallery.length > 0 && (
-        <section className="project-gallery-section container" style={{ marginTop: 'var(--space-xl)' }}>
-          <ScrollReveal variants={fadeUp} style={{ textAlign: 'center', marginBottom: 'var(--space-lg)' }}>
-            <h3 className="pill-badge">Image Gallery</h3>
-          </ScrollReveal>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)', alignItems: 'center', maxWidth: '1000px', margin: '0 auto' }}>
-            {project.imageGallery.map((img, i) => {
-              // Extract filename without extension and format it (e.g., "Product 1", "motif")
-              const rawName = img.split('/').pop().split('.')[0].replace(/[-_]/g, ' ');
-              const formattedTitle = rawName.charAt(0).toUpperCase() + rawName.slice(1);
-              
-              const isVideo = img.toLowerCase().endsWith('.webm') || img.toLowerCase().endsWith('.mp4');
-              
-              return (
-                <ScrollReveal key={img} variants={fadeUp} delay={0.1} style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                  <div className="gallery-item scrapbook-card no-border" style={{ overflow: 'hidden', width: isVideo ? 'fit-content' : '100%', maxWidth: '100%' }}>
-                    {isVideo ? (
-                      <video src={img} autoPlay loop muted playsInline style={{ maxWidth: '100%', maxHeight: '85vh', width: 'auto', height: 'auto', display: 'block', borderRadius: 0, margin: '0 auto' }} />
-                    ) : (
-                      <img src={img} alt={`${project.title} - ${formattedTitle}`} style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 0 }} loading="lazy" />
-                    )}
-                    {i % 2 === 0 ? <div className="tape tape-top"></div> : <div className="tape tape-bottom" style={{ bottom: '-10px', top: 'auto' }}></div>}
-                  </div>
+      {slug !== 'komudika-kaavya' && project.imageGallery && project.imageGallery.length > 0 && (() => {
+        const videos = project.imageGallery.filter(img =>
+          img.toLowerCase().endsWith('.webm') || img.toLowerCase().endsWith('.mp4')
+        );
+        const images = project.imageGallery.filter(img =>
+          !img.toLowerCase().endsWith('.webm') && !img.toLowerCase().endsWith('.mp4')
+        );
+        const stickyCards = images.map((img, i) => ({
+          id: i,
+          image: img,
+          alt: `${project.title} - Gallery ${i + 1}`,
+        }));
+
+        return (
+          <>
+            {/* iPhone mockup for video(s) */}
+            {videos.length > 0 && (
+              project.mockupBg ? (
+              <section className="iphone-showcase-section container" style={{ marginTop: 'var(--space-xl)' }}>
+                {/* Background photo */}
+                <div className="iphone-bg-photo" style={{ backgroundImage: `url(${project.mockupBg})` }} />
+                {/* Warm overlay */}
+                <div className="iphone-bg-overlay" />
+
+                {/* Corner bracket accents */}
+                {['tl','tr','bl','br'].map((pos) => (
+                  <svg key={pos} className={`corner-bracket corner-bracket--${pos}`} width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                    {pos === 'tl' && <path d="M2 20 L2 2 L20 2" stroke="white" strokeWidth="2" strokeOpacity="0.6" fill="none"/>}
+                    {pos === 'tr' && <path d="M20 2 L38 2 L38 20" stroke="white" strokeWidth="2" strokeOpacity="0.6" fill="none"/>}
+                    {pos === 'bl' && <path d="M2 20 L2 38 L20 38" stroke="white" strokeWidth="2" strokeOpacity="0.6" fill="none"/>}
+                    {pos === 'br' && <path d="M20 38 L38 38 L38 20" stroke="white" strokeWidth="2" strokeOpacity="0.6" fill="none"/>}
+                  </svg>
+                ))}
+
+                {/* Floating palette swatches — positioned to match bg image colours */}
+                {(project.mockupSwatches || project.palette?.map((hex, i) => ({
+                  hex, x: i % 2 === 0 ? 8 : 88, y: 15 + i * 12
+                }))).map(({ hex, x, y }, i) => (
+                  <motion.div
+                    key={hex + i}
+                    className="floating-swatch"
+                    style={{ background: hex, left: `${x}%`, top: `${y}%` }}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.06, type: 'spring', stiffness: 200, damping: 14 }}
+                    aria-hidden="true"
+                  />
+                ))}
+
+                {/* Frosted glass panel + phone */}
+                <div className="iphone-glass-panel">
+                  <ScrollReveal variants={fadeUp} style={{ width: '100%', maxWidth: '280px' }}>
+                    <IphoneMockup videoSrc={videos[0]} />
+                  </ScrollReveal>
+                </div>
+              </section>
+              ) : (
+              <section className="container" style={{ marginTop: 'var(--space-xl)', display: 'flex', justifyContent: 'center' }}>
+                <ScrollReveal variants={fadeUp} style={{ width: '100%', maxWidth: '300px' }}>
+                  <IphoneMockup videoSrc={videos[0]} />
                 </ScrollReveal>
-              );
-            })}
-          </div>
-        </section>
-      )}
+              </section>
+              )
+            )}
+
+            {/* Sticky scroll cards / carousel for images */}
+            {stickyCards.length > 0 && (
+              <div style={{ position: 'relative', zIndex: 2, isolation: 'isolate' }}>
+              <section style={{ marginTop: 'var(--space-xl)', width: '100%' }}>
+                <ScrollReveal variants={fadeUp} style={{ textAlign: 'center', marginBottom: 'var(--space-lg)' }}>
+                  <h3 className="pill-badge">Image Gallery</h3>
+                </ScrollReveal>
+                {slug === 'picnic-cloth' ? (
+                  <PicnicCarousel
+                    images={stickyCards.map(c => ({ src: c.image, alt: c.alt }))}
+                  />
+                ) : (
+                  <StickyCards
+                    cards={stickyCards}
+                    bgColor={project.theme?.bg || '#FAFAF8'}
+                  />
+                )}
+              </section>
+              </div>
+            )}
+          </>
+        );
+      })()}
 
       {/* ── Coming soon overlay ──────────────────────────── */}
       {!project.available && (

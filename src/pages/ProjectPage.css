@@ -423,6 +423,18 @@
   display: block;
 }
 
+@media (max-width: 768px) {
+  .swatch-card img {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════
    SECTION DIVIDER — elegant pill badge override
    ═══════════════════════════════════════════════════════════ */
@@ -550,4 +562,83 @@
 .komudika-layout .has-theme-border {
   border: 1.5px solid #CECECE !important;
   border-radius: 8px;
+}
+
+/* ── iPhone Showcase Section ─────────────────────────────── */
+.iphone-showcase-section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 600px;
+  overflow: hidden;
+  border-radius: 20px;
+  padding: var(--space-2xl) var(--space-lg);
+  isolation: isolate;
+  z-index: 1;
+}
+
+/* Background photo */
+.iphone-bg-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 30%;
+  filter: blur(3px) saturate(0.85);
+  transform: scale(1.05); /* prevents blur edge bleed */
+  z-index: -1;
+}
+
+/* Warm semi-transparent overlay */
+.iphone-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(240, 222, 208, 0.55) 0%,
+    rgba(100, 120, 165, 0.35) 100%
+  );
+  z-index: 1;
+}
+
+/* Corner bracket accents */
+.corner-bracket {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+}
+.corner-bracket--tl { top: 20px; left: 20px; }
+.corner-bracket--tr { top: 20px; right: 20px; }
+.corner-bracket--bl { bottom: 20px; left: 20px; }
+.corner-bracket--br { bottom: 20px; right: 20px; }
+
+/* Frosted glass panel behind the phone */
+.iphone-glass-panel {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 36px 40px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Floating colour swatches */
+.floating-swatch {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
 import ThreadDivider from './ThreadDivider';
@@ -25,11 +24,39 @@ const LinkedInIcon = () => (
   <svg width="16" height="16" viewBox="0 0 448 512" fill="currentColor"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.83-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>
 );
 
+/* ── Skill categories data ── */
+const skillCategories = [
+  {
+    title: 'Textile Techniques',
+    items: ['Weaving', 'Knitting', 'Crocheting', 'Fabric manipulation', 'Material exploration'],
+  },
+  {
+    title: 'Print Design',
+    items: ['Seamless repeat patterns', 'Placement print design', 'Motif development', 'Colorway creation', 'Print mockups', 'Knowledge of traditional and digital printing techniques'],
+  },
+  {
+    title: 'Surface Development',
+    items: ['Embroidery design & surface ornamentation', 'Texture development', 'Mixed-media experimentation', 'Patchwork and stitching'],
+  },
+  {
+    title: 'Research & Trend Analysis',
+    items: ['Trend forecasting & market research', 'Concept and mood board development', 'Cultural & craft research'],
+  },
+  {
+    title: 'AI & Innovation',
+    description: 'I leverage AI tools to accelerate concept development and generate design variations, visual prototypes and mockups — bringing ideas to life faster while keeping creativity at the forefront.',
+  },
+  {
+    title: 'Creative Strengths',
+    items: ['Concept-driven design thinking', 'Print & pattern storytelling', 'Color and composition', 'Detail-oriented execution', 'Creative problem-solving', 'Adaptability & collaboration'],
+  },
+];
+
 const Hero = () => {
   return (
     <main>
       {/* ════════════════════════════════════════════════════════
-          COVER SECTION — Built with clean code, 100% responsive
+          COVER SECTION
           ════════════════════════════════════════════════════════ */}
       <section className="cover-section">
         <motion.img
@@ -40,39 +67,37 @@ const Hero = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         />
-
       </section>
 
       <ThreadDivider />
 
       {/* ════════════════════════════════════════════════════════
-          RESUME / ABOUT — Clean professional grid
+          RESUME / ABOUT + SKILLS — all in one section
           ════════════════════════════════════════════════════════ */}
       <section className="hero-section container section-padding">
         <div className="hero-grid">
 
-          {/* ── LEFT: Profile Image + About ─────────────────── */}
+          {/* ── LEFT: Profile Image with name overlay ───────── */}
           <ScrollReveal variants={fadeLeft} className="hero-left">
             <div className="profile-card">
-              <img 
-                src="/deeksha-mehra-opt.webp" 
-                alt="Deeksha Mehra" 
+              <img
+                src="/deeksha-mehra-opt.webp"
+                alt="Deeksha Mehra"
                 className="profile-image"
                 loading="eager"
               />
+              <div className="profile-overlay">
+                <h1 className="hero-name">Deeksha Mehra</h1>
+                <p className="hero-tagline">Textile Designer</p>
+              </div>
             </div>
-            <div className="about-block">
-              <h1 className="hero-name">Deeksha Mehra</h1>
-              <p className="hero-tagline">Textile Designer</p>
-              <p className="hero-bio">
-                Textile Design graduate with a minor in Fashion Communication. I'm always chasing the perfect blend of tradition and innovation because design should never be boring, and neither should the fabrics we live with.
-              </p>
-            </div>
+            <p className="hero-bio">
+              Textile Design graduate with a minor in Fashion Communication. I'm always chasing the perfect blend of tradition and innovation because design should never be boring, and neither should the fabrics we live with.
+            </p>
           </ScrollReveal>
 
-          {/* ── CENTER: Contact + Skills ────────────────────── */}
+          {/* ── CENTER: Contact + Interests ─────────────────── */}
           <ScrollReveal variants={fadeUp} className="hero-center">
-            
             <div className="info-card">
               <h2 className="info-card-title">Contact</h2>
               <div className="contact-list">
@@ -104,22 +129,20 @@ const Hero = () => {
             </div>
 
             <div className="info-card">
-              <h2 className="info-card-title">Skills</h2>
-              <ul className="skill-list">
-                <li>Basic weaving, Hand spinning, Crocheting, Knitting Techniques</li>
-                <li>Traditional Emobroideries and other surface Techniques</li>
-                <li>Experience with different type of printing Techniques</li>
-                <li>Illustrations (digital and hand)</li>
-                <li>Ability to analyze current threads in textiles and fashion</li>
-                <li style={{ color: '#C21E56' }}>I leverage AI tools to accelerate concept development, allowing me to quickly generate design variations, visual prototypes, and mockups. This lets me explore more ideas in less time, test different directions, and ensure I bring the strongest vision to life - always keeping my creative vision at the forefront</li>
-              </ul>
+              <h2 className="info-card-title">Interests</h2>
+              <div className="interests-grid">
+                <span className="interest-chip">Knitting</span>
+                <span className="interest-chip">Crocheting</span>
+                <span className="interest-chip">Cycling</span>
+                <span className="interest-chip">Sewing</span>
+                <span className="interest-chip">Styling</span>
+                <span className="interest-chip">Photography</span>
+              </div>
             </div>
-
           </ScrollReveal>
 
-          {/* ── RIGHT: Software, Interests, Education ───────── */}
+          {/* ── RIGHT: Software + Education ─────────────────── */}
           <ScrollReveal variants={fadeRight} className="hero-right">
-            
             <div className="info-card">
               <h2 className="info-card-title">Software</h2>
               <ul className="skill-list">
@@ -133,35 +156,83 @@ const Hero = () => {
             </div>
 
             <div className="info-card">
-              <h2 className="info-card-title">Interests</h2>
-              <div className="interests-grid">
-                <span className="interest-chip">Knitting</span>
-                <span className="interest-chip">Crocheting</span>
-                <span className="interest-chip">Cycling</span>
-                <span className="interest-chip">Sewing</span>
-                <span className="interest-chip">Styling</span>
-                <span className="interest-chip">Photography</span>
-              </div>
-            </div>
-
-            <div className="info-card">
               <h2 className="info-card-title">Education</h2>
               <div className="edu-block">
                 <p className="edu-line">National Institute of Fashion Technology, Himachal Pradesh</p>
                 <p className="edu-sub">Bachelor of Design (B.Des) — Textile Design</p>
                 <p className="edu-sub">(2022 - 2026) - CGPA : 8.1</p>
               </div>
-              <br></br>
+              <br />
               <div className="edu-block">
                 <p className="edu-line">Gurukul International School, Haldwani, Nainital</p>
                 <p className="edu-sub">High School (12th) - PCM</p>
                 <p className="edu-sub">Percentage : 86%</p>
               </div>
             </div>
-
           </ScrollReveal>
 
         </div>
+
+        {/* ── Skills card grid ── */}
+        <ScrollReveal variants={fadeUp} style={{ marginTop: 'var(--space-2xl)' }}>
+          <h2 className="info-card-title" style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-md)' }}>Skills</h2>
+        </ScrollReveal>
+        <motion.div
+          className="skills-grid"
+          variants={staggerContainer(0.08, 0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+        >
+          {skillCategories.map((cat, i) => (
+            <motion.div key={i} className="skill-card" variants={staggerChild}>
+              {/* Binder clip */}
+              <div className="binder-clip" aria-hidden="true">
+                <svg viewBox="0 0 60 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Wire handles */}
+                  <path d="M18 38 C18 38 10 30 14 18 C17 9 26 6 30 6 C34 6 43 9 46 18 C50 30 42 38 42 38"
+                    stroke="#b0b0b0" strokeWidth="3.5" strokeLinecap="round" fill="none"
+                    style={{filter:'drop-shadow(0 1px 1px rgba(0,0,0,0.2))'}}/>
+                  {/* Inner wire arch */}
+                  <path d="M23 38 C23 38 17 31 20 21 C22.5 13 27 11 30 11 C33 11 37.5 13 40 21 C43 31 37 38 37 38"
+                    stroke="#cccccc" strokeWidth="2" strokeLinecap="round" fill="none"/>
+
+                  {/* Clip body — main block */}
+                  <rect x="6" y="38" width="48" height="26" rx="3" fill="#f2b8c6"/>
+                  {/* Body highlight */}
+                  <rect x="6" y="38" width="48" height="8" rx="3" fill="#f8d0db" opacity="0.7"/>
+                  {/* Body shadow bottom */}
+                  <rect x="6" y="56" width="48" height="8" rx="3" fill="#d9869e" opacity="0.5"/>
+
+                  {/* Centre spine */}
+                  <rect x="27" y="38" width="6" height="26" fill="#e8a0b4" opacity="0.6"/>
+                  {/* Spine highlight */}
+                  <rect x="28" y="38" width="2" height="26" fill="white" opacity="0.2"/>
+
+                  {/* Left jaw notch */}
+                  <path d="M6 58 L6 64 Q6 64 12 64 L12 58 Q12 62 9 62 Q6 62 6 58Z" fill="#d9869e" opacity="0.6"/>
+                  {/* Right jaw notch */}
+                  <path d="M54 58 L54 64 Q54 64 48 64 L48 58 Q48 62 51 62 Q54 62 54 58Z" fill="#d9869e" opacity="0.6"/>
+
+                  {/* Bottom edge detail */}
+                  <rect x="8" y="62" width="44" height="2" rx="1" fill="#c97a9a" opacity="0.4"/>
+                </svg>
+              </div>
+              <h3 className="skill-card-title">{cat.title}</h3>
+              <div className="skill-card-divider" />
+              {cat.description ? (
+                <p className="skill-card-desc">{cat.description}</p>
+              ) : (
+                <ul className="skill-card-list">
+                  {cat.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              )}
+            </motion.div>
+          ))}
+        </motion.div>
+
       </section>
     </main>
   );

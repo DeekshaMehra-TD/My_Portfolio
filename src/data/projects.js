@@ -20,6 +20,19 @@ export const projects = [
       { label: 'Year', value: '2025' }
     ],
     flipbookSrc: 'https://heyzine.com/flip-book/77f3184642.html',
+    mockupBg: '/KamalMockup.webp',
+    mockupSwatches: [
+      { hex: '#6276A2', x: 19, y: 29 },
+      { hex: '#DCE1C0', x: 57, y: 89 },
+      { hex: '#A4B7A4', x: 68, y: 46 },
+      { hex: '#7B8B82', x: 68, y: 65 },
+      { hex: '#F2E0B3', x: 63, y: 69 },
+      { hex: '#F3DCE2', x: 21, y: 76 },
+      { hex: '#ECB4C8', x: 93, y: 60 },
+      { hex: '#EFB8CD', x: 93, y: 54 },
+      { hex: '#E596B2', x: 93, y: 67 },
+      { hex: '#D781A5', x: 22, y: 72 },
+    ],
     boards: [
       '/Kamal/Themeboard-opt.webp',
       '/Kamal/Moodboard-opt.webp'
@@ -92,6 +105,16 @@ export const projects = [
       { label: 'Year', value: '2025' }
     ],
     flipbookSrc: 'https://heyzine.com/flip-book/0302bb6ab8.html',
+    mockupBg: '/PicnicClothMockup.webp',
+    mockupSwatches: [
+      { hex: '#6478A5', x: 10, y: 20 },
+      { hex: '#ACCACC', x: 7,  y: 45 },
+      { hex: '#BFD089', x: 12, y: 68 },
+      { hex: '#F16049', x: 82, y: 18 },
+      { hex: '#F4AE34', x: 88, y: 42 },
+      { hex: '#F0DED0', x: 85, y: 65 },
+      { hex: '#FEFEFE', x: 75, y: 82 },
+    ],
     boards: [
       '/Picnic Cloth/Moodboard-opt.webp',
       '/Picnic Cloth/lookboard-opt.webp'

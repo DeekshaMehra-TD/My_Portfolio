@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
-import ThreadDivider from './ThreadDivider';
 import { fadeLeft, fadeRight, fadeUp, staggerContainer, staggerChild, viewport } from '../hooks/useScrollReveal';
+import IntroHero from './IntroHero';
 import './Hero.css';
 
 /* ── Lightweight inline SVG icons ── */
@@ -44,7 +44,7 @@ const skillCategories = [
   },
   {
     title: 'AI & Innovation',
-    description: 'I leverage AI tools to accelerate concept development and generate design variations, visual prototypes and mockups — bringing ideas to life faster while keeping creativity at the forefront.',
+    description: 'I leverage AI tools to accelerate concept development and generate design variations, visual prototypes and mockups bringing ideas to life faster while keeping creativity at the forefront.',
   },
   {
     title: 'Creative Strengths',
@@ -56,45 +56,16 @@ const Hero = () => {
   return (
     <main>
       {/* ════════════════════════════════════════════════════════
-          COVER SECTION
+          INTRO HERO — Responsive layered composition
           ════════════════════════════════════════════════════════ */}
-      <section className="cover-section">
-        <motion.img
-          src="/Home Page-opt.webp"
-          alt="Deeksha Mehra — Textile Design Portfolio"
-          className="cover-image"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-        />
-      </section>
-
-      <ThreadDivider />
+      <IntroHero />
 
       {/* ════════════════════════════════════════════════════════
           RESUME / ABOUT + SKILLS — all in one section
           ════════════════════════════════════════════════════════ */}
-      <section className="hero-section container section-padding">
-        <div className="hero-grid">
-
-          {/* ── LEFT: Profile Image with name overlay ───────── */}
-          <ScrollReveal variants={fadeLeft} className="hero-left">
-            <div className="profile-card">
-              <img
-                src="/deeksha-mehra-opt.webp"
-                alt="Deeksha Mehra"
-                className="profile-image"
-                loading="eager"
-              />
-              <div className="profile-overlay">
-                <h1 className="hero-name">Deeksha Mehra</h1>
-                <p className="hero-tagline">Textile Designer</p>
-              </div>
-            </div>
-            <p className="hero-bio">
-              Textile Design graduate with a minor in Fashion Communication. I'm always chasing the perfect blend of tradition and innovation because design should never be boring, and neither should the fabrics we live with.
-            </p>
-          </ScrollReveal>
+      <section className="hero-section" style={{ background: 'white' }}>
+        <div className="container section-padding" style={{ paddingTop: 'var(--space-md)', paddingBottom: 'var(--space-2xl)' }}>
+          <div className="hero-grid">
 
           {/* ── CENTER: Contact + Interests ─────────────────── */}
           <ScrollReveal variants={fadeUp} className="hero-center">
@@ -172,11 +143,55 @@ const Hero = () => {
           </ScrollReveal>
 
         </div>
+        </div>
+      </section>
 
-        {/* ── Skills card grid ── */}
-        <ScrollReveal variants={fadeUp} style={{ marginTop: 'var(--space-2xl)' }}>
-          <h2 className="info-card-title" style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-md)' }}>Skills</h2>
-        </ScrollReveal>
+      {/* ════════════════════════════════════════════════════════
+          SKILLS SECTION — distinct section with floral background
+          ════════════════════════════════════════════════════════ */}
+      <section className="skills-section container section-padding" style={{ paddingTop: '0' }}>
+        {/* ── Skills title wrapper ── */}
+        <div style={{
+          transform: 'translateY(-50%)',
+          marginBottom: 'var(--space-lg)',
+          position: 'relative',
+          zIndex: 10
+        }}>
+          <ScrollReveal variants={fadeUp} style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+          }}>
+          {/* Left Line */}
+          <div style={{ flex: 1, height: '1.5px', background: 'white', opacity: 0.8 }}></div>
+
+          <div style={{
+            position: 'relative',
+            display: 'inline-block',
+            padding: '3px',
+            background: 'rgba(255, 255, 255, 0.7)',
+            backdropFilter: 'blur(6px)',
+            borderRadius: '50px',
+            boxShadow: '0 4px 15px rgba(0,0,0,0.03)'
+          }}>
+            <h2 style={{
+              fontSize: 'var(--text-lg)',
+              color: 'var(--color-raspberry)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.15em',
+              fontFamily: 'var(--font-secondary)',
+              fontWeight: 500,
+              padding: '0.2rem 1.9rem',
+              borderRadius: '50px',
+              border: '1px dashed rgba(194, 30, 86, 0.4)',
+              margin: 0
+            }}>Skills</h2>
+          </div>
+
+          {/* Right Line */}
+          <div style={{ flex: 1, height: '1.5px', background: 'white', opacity: 0.8 }}></div>
+          </ScrollReveal>
+        </div>
         <motion.div
           className="skills-grid"
           variants={staggerContainer(0.08, 0.1)}
@@ -231,8 +246,7 @@ const Hero = () => {
               )}
             </motion.div>
           ))}
-        </motion.div>
-
+          </motion.div>
       </section>
     </main>
   );

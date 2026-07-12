@@ -105,6 +105,11 @@ body {
   font-family: var(--font-secondary);
   font-size: var(--text-base);
   background-color: var(--color-pink-base);
+  /* Use a translucent overlay to 'decrease opacity' of the background image */
+  background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.25)), url('/motherprint.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: var(--color-indigo);
   position: relative;
   overflow-x: hidden;

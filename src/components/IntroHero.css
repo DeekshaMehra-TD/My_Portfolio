@@ -16,14 +16,25 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  position: relative;
 }
 
-.motherprint-image {
+.motherprint-repeat {
   width: 100%;
   height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: center;
+  background-image: url('/motherprint (1).png');
+  background-repeat: repeat;
+  background-size: 2000px auto;
+  animation: flowRepeat 50s linear infinite;
+}
+
+@keyframes flowRepeat {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 2000px 0;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════

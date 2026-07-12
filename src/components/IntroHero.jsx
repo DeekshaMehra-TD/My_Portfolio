@@ -4,11 +4,7 @@ const IntroHero = () => {
   return (
     <div className="intro-container">
       <section className="intro-motherprint">
-        <img
-          src="/motherprint.png"
-          alt=""
-          className="motherprint-image"
-        />
+        <div className="motherprint-repeat"></div>
       </section>
 
       <section className="intro-hero">
